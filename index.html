@@ -1,17 +1,244 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Web</title>
-    <!-- Tailwind CSS vía CDN -->
+    <title>Web | Lucas</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        /* Active nav link highlight */
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #10b981;
+            border-left-color: #10b981;
+        }
+    </style>
 </head>
 
-<body>
-    <h1>Hola</h1>
-    <h1>Hola</h1>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-white min-h-screen">
+
+    <!-- Modo Oscuro ---->
+    <button onclick="toggleTheme()"
+        class="fixed top-4 right-4 z-50 p-3 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun-moon">
+            <path d="M12 2v2" />
+            <path
+                d="M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715" />
+            <path d="M16 12a4 4 0 0 0-4-4" />
+            <path d="m19 5-1.256 1.256" />
+            <path d="M20 12h2" />
+        </svg>
+    </button>
+
+    <!-- Main de dos columnas ---->
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Columna Izquierda: Perfil + Índice ---->
+        <aside class="w-full md:w-72 lg:w-80 shrink-0 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800
+            p-8 md:p-10 flex flex-col items-center gap-6 md:sticky md:top-0 md:h-screen md:overflow-y-auto">
+
+            <!-- Foto de perfil -->
+            <img src="img/IMG_3610.JPG" alt="Lucas Saavedra"
+                class="w-32 h-32 rounded-full object-cover ring-4 ring-emerald-500/30 mt-4">
+
+            <!-- Nombre y rol -->
+            <div class="text-center">
+                <h1 class="text-xl font-bold tracking-tight">Lucas Saavedra</h1>
+                <p class="text-emerald-600 dark:text-emerald-400 text-sm font-medium mt-1">Desarrollador Web</p>
+            </div>
+
+            <!-- Separador -->
+            <hr class="w-full border-gray-200 dark:border-gray-800">
+
+            <!-- Índice / Navegación -->
+            <nav class="w-full flex flex-col gap-1">
+                <a href="#sobre-mi"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Sobre mí
+                </a>
+                <a href="#experiencia"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Experiencia
+                </a>
+                <a href="#proyectos"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Proyectos
+                </a>
+                <a href="#habilidades"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Habilidades
+                </a>
+                <a href="#contacto"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    Contacto
+                </a>
+            </nav>
+
+            <!-- Redes sociales -->
+            <div class="mt-auto flex gap-4 pb-4">
+                <a href="#" class="text-gray-400 hover:text-emerald-500 transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-emerald-500 transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-emerald-500 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+                    </svg>
+                </a>
+            </div>
+
+        </aside>
+
+        <!-- Columna Derecha: Contenido ---->
+        <main class="flex-1 p-8 md:p-12 lg:p-16 overflow-y-auto">
+            <div class="max-w-3xl mx-auto space-y-20">
+
+                <!-- Sobre mí -->
+                <section id="sobre-mi" class="scroll-mt-8">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        Sobre mí
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 text-lg">
+                        Acá va tu presentación. Contá quién sos, qué te apasiona, y qué tipo de 
+                        trabajo hacés. Este es el primer texto que van a leer tus visitantes.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                        exercitation ullamco laboris.
+                    </p>
+                </section>
+
+                <!-- Experiencia -->
+                <section id="experiencia" class="scroll-mt-8">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        Experiencia
+                    </h2>
+                    <div class="space-y-8">
+                        <!-- Item de experiencia -->
+                        <div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700">
+                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-emerald-500"></div>
+                            <h3 class="text-lg font-semibold">Desarrollador Frontend</h3>
+                            <p class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">Empresa XYZ · 2024 - Presente</p>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">
+                                Descripción de tu rol, responsabilidades y logros en este puesto.
+                            </p>
+                        </div>
+                        <!-- Item de experiencia -->
+                        <div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700">
+                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-emerald-500/50"></div>
+                            <h3 class="text-lg font-semibold">Freelance</h3>
+                            <p class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">2023 - 2024</p>
+                            <p class="text-gray-600 dark:text-gray-400 mt-2">
+                                Descripción de los proyectos freelance que realizaste.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Proyectos -->
+                <section id="proyectos" class="scroll-mt-8">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        Proyectos
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Proyecto 1 -->
+                        <div class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-emerald-500/50 transition-all hover:shadow-lg hover:shadow-emerald-500/5">
+                            <h3 class="text-lg font-semibold group-hover:text-emerald-500 transition-colors">Proyecto 1</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                Descripción breve del proyecto y las tecnologías usadas.
+                            </p>
+                            <div class="flex gap-2 mt-4">
+                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">HTML</span>
+                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">CSS</span>
+                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">JS</span>
+                            </div>
+                        </div>
+                        <!-- Proyecto 2 -->
+                        <div class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-emerald-500/50 transition-all hover:shadow-lg hover:shadow-emerald-500/5">
+                            <h3 class="text-lg font-semibold group-hover:text-emerald-500 transition-colors">Proyecto 2</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                Descripción breve del proyecto y las tecnologías usadas.
+                            </p>
+                            <div class="flex gap-2 mt-4">
+                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">React</span>
+                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Habilidades -->
+                <section id="habilidades" class="scroll-mt-8">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        Habilidades
+                    </h2>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">HTML</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">CSS</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">JavaScript</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">Tailwind CSS</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">Git</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">React</span>
+                    </div>
+                </section>
+
+                <!-- Contacto -->
+                <section id="contacto" class="scroll-mt-8 pb-12">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        Contacto
+                    </h2>
+                    <div class="p-8 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            ¿Querés trabajar conmigo o tenés alguna pregunta? Escribime.
+                        </p>
+                        <div class="flex flex-col gap-4">
+                            <a href="mailto:lucas@email.com"
+                                class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 font-medium transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+                                </svg>
+                                lucas@email.com
+                            </a>
+                            <a href="#"
+                                class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 font-medium transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                                LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
