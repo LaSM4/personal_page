@@ -4,30 +4,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web | Lucas</title>
+    <title>Lucas Saavedra — Programador · Analista en formación</title>
+    <meta name="description"
+        content="Página personal de Lucas Saavedra. Programador, estudiante de Análisis de Sistemas y Técnico Agropecuario. Tecnología, sistemas y procesos.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        html { scroll-behavior: smooth; }
-        /* Active nav link highlight */
-        .nav-link {
-            transition: all 0.2s ease;
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        }
+                    }
+                }
+            }
         }
-        .nav-link:hover, .nav-link.active {
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Nav link transitions */
+        .nav-link {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
             color: #10b981;
             border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.06);
+        }
+
+        /* Scroll-triggered animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children animation */
+        .stagger-children .fade-up:nth-child(1) {
+            transition-delay: 0ms;
+        }
+
+        .stagger-children .fade-up:nth-child(2) {
+            transition-delay: 80ms;
+        }
+
+        .stagger-children .fade-up:nth-child(3) {
+            transition-delay: 160ms;
+        }
+
+        .stagger-children .fade-up:nth-child(4) {
+            transition-delay: 240ms;
+        }
+
+        .stagger-children .fade-up:nth-child(5) {
+            transition-delay: 320ms;
+        }
+
+        .stagger-children .fade-up:nth-child(6) {
+            transition-delay: 400ms;
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(16, 185, 129, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.08);
+        }
+
+        html:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        html:not(.dark) .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.1);
+        }
+
+        /* Timeline connector */
+        .timeline-dot {
+            position: relative;
+        }
+
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(to bottom, #10b981, transparent);
+        }
+
+        /* Sidebar gradient */
+        .sidebar-gradient {
+            background: linear-gradient(180deg,
+                    rgba(16, 185, 129, 0.03) 0%,
+                    transparent 40%,
+                    transparent 60%,
+                    rgba(16, 185, 129, 0.02) 100%);
+        }
+
+        /* Tag hover glow */
+        .tech-tag {
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Question cards */
+        .question-card {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            border-radius: 3px;
+            background: linear-gradient(to bottom, #10b981, #059669);
+        }
+
+        /* Section heading line animation */
+        .section-line {
+            width: 0;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+        }
+
+        .visible .section-line {
+            width: 2rem;
+        }
+
+        /* Mobile menu */
+        .mobile-nav {
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.open {
+            transform: translateX(0);
+        }
+
+        /* Interest emoji float */
+        .interest-emoji {
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover .interest-emoji {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.4);
         }
     </style>
 </head>
 
-<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-white min-h-screen">
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-white min-h-screen font-sans antialiased">
 
-    <!-- Modo Oscuro ---->
-    <button onclick="toggleTheme()"
-        class="fixed top-4 right-4 z-50 p-3 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-sun-moon">
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
+        class="md:hidden fixed top-4 left-4 z-[60] p-2.5 rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border border-gray-200 dark:border-gray-800 hover:border-accent-500/50 transition-all"
+        aria-label="Abrir menú de navegación">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" />
+        </svg>
+    </button>
+
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" onclick="toggleTheme()"
+        class="fixed top-4 right-4 z-[60] p-2.5 rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border border-gray-200 dark:border-gray-800 hover:border-accent-500/50 transition-all"
+        aria-label="Cambiar tema">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2v2" />
             <path
                 d="M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715" />
@@ -37,196 +252,701 @@
         </svg>
     </button>
 
-    <!-- Main de dos columnas ---->
+    <!-- Main Layout -->
     <div class="min-h-screen flex flex-col md:flex-row">
 
-        <!-- Columna Izquierda: Perfil + Índice ---->
-        <aside class="w-full md:w-72 lg:w-80 shrink-0 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800
-            p-8 md:p-10 flex flex-col items-center gap-6 md:sticky md:top-0 md:h-screen md:overflow-y-auto">
+        <!-- Mobile Overlay -->
+        <div id="mobile-overlay" class="md:hidden fixed inset-0 bg-black/50 z-40 hidden" onclick="toggleMobileMenu()">
+        </div>
 
-            <!-- Foto de perfil -->
-            <img src="img/IMG_3610.JPG" alt="Lucas Saavedra"
-                class="w-32 h-32 rounded-full object-cover ring-4 ring-emerald-500/30 mt-4">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="mobile-nav md:transform-none fixed md:sticky top-0 left-0 h-screen z-50 md:z-auto
+                   w-72 lg:w-80 shrink-0 
+                   bg-gray-100/95 dark:bg-gray-900/95 backdrop-blur-xl
+                   border-r border-gray-200 dark:border-gray-800
+                   p-8 md:p-10 flex flex-col items-center gap-6
+                   md:h-screen overflow-y-auto sidebar-gradient">
 
-            <!-- Nombre y rol -->
-            <div class="text-center">
-                <h1 class="text-xl font-bold tracking-tight">Lucas Saavedra</h1>
-                <p class="text-emerald-600 dark:text-emerald-400 text-sm font-medium mt-1">Desarrollador Web</p>
+            <!-- Profile Photo -->
+            <div class="relative mt-4 group">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full opacity-20 group-hover:opacity-40 blur-sm transition-opacity duration-500">
+                </div>
+                <img src="img/IMG_3610.JPG" alt="Lucas Saavedra"
+                    class="relative w-28 h-28 rounded-full object-cover ring-2 ring-accent-500/30 group-hover:ring-accent-500/60 transition-all duration-500">
             </div>
 
-            <!-- Separador -->
-            <hr class="w-full border-gray-200 dark:border-gray-800">
+            <!-- Name & Role -->
+            <div class="text-center">
+                <h1 class="text-xl font-bold tracking-tight">Lucas Saavedra</h1>
+                <p class="text-accent-600 dark:text-accent-400 text-sm font-medium mt-1.5 tracking-wide">Programador ·
+                    Analista en formación</p>
+            </div>
 
-            <!-- Índice / Navegación -->
-            <nav class="w-full flex flex-col gap-1">
-                <a href="#sobre-mi"
-                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <!-- Separator -->
+            <hr class="w-full border-gray-200/60 dark:border-gray-800/60">
+
+            <!-- Navigation -->
+            <nav class="w-full flex flex-col gap-0.5" aria-label="Navegación principal">
+                <a href="#sobre-mi" id="nav-sobre-mi"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
                     Sobre mí
                 </a>
-                <a href="#experiencia"
-                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                <a href="#recorrido" id="nav-recorrido"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
+                    Mi recorrido
+                </a>
+                <a href="#experiencia" id="nav-experiencia"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
                     Experiencia
                 </a>
-                <a href="#proyectos"
-                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
-                    Proyectos
+                <a href="#proyectos" id="nav-proyectos"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
+                    Cosas que hice
                 </a>
-                <a href="#habilidades"
-                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
-                    Habilidades
+                <a href="#actualmente" id="nav-actualmente"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
+                    Actualmente
                 </a>
-                <a href="#contacto"
-                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                <a href="#tecnologia" id="nav-tecnologia"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
+                    Tecnología
+                </a>
+                <a href="#intereses" id="nav-intereses"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
+                    Off Code
+                </a>
+                <a href="#contacto" id="nav-contacto"
+                    class="nav-link px-4 py-2.5 text-sm font-medium rounded-lg border-l-2 border-transparent text-gray-500 dark:text-gray-400">
                     Contacto
                 </a>
             </nav>
 
-            <!-- Redes sociales -->
+            <!-- Social Links -->
             <div class="mt-auto flex gap-4 pb-4">
-                <a href="#" class="text-gray-400 hover:text-emerald-500 transition-colors">
+                <a href="https://github.com/LaSM4" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-400 hover:text-accent-500 transition-colors duration-300" aria-label="GitHub">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                     </svg>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-emerald-500 transition-colors">
+                <a href="https://www.linkedin.com/in/lucas-a-saavedra-maciel-a79891200/" target="_blank"
+                    rel="noopener noreferrer" class="text-gray-400 hover:text-accent-500 transition-colors duration-300"
+                    aria-label="LinkedIn">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                        <circle cx="4" cy="4" r="2" />
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-emerald-500 transition-colors">
+                <a href="mailto:lucasasm096@gmail.com"
+                    class="text-gray-400 hover:text-accent-500 transition-colors duration-300" aria-label="Email">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <rect x="2" y="4" width="20" height="16" rx="2" />
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
                     </svg>
                 </a>
             </div>
-
         </aside>
 
-        <!-- Columna Derecha: Contenido ---->
-        <main class="flex-1 p-8 md:p-12 lg:p-16 overflow-y-auto">
-            <div class="max-w-3xl mx-auto space-y-20">
-
-                <!-- Sobre mí -->
-                <section id="sobre-mi" class="scroll-mt-8">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+        <!-- Main Content -->
+        <main class="flex-1 p-6 pt-16 md:pt-6 md:p-12 lg:p-16 overflow-y-auto">
+            <div class="max-w-3xl mx-auto space-y-24">
+                <!-- SOBRE MÍ -->
+                <section id="sobre-mi" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
                         Sobre mí
                     </h2>
-                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 text-lg">
-                        Acá va tu presentación. Contá quién sos, qué te apasiona, y qué tipo de 
-                        trabajo hacés. Este es el primer texto que van a leer tus visitantes.
-                    </p>
-                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                        exercitation ullamco laboris.
-                    </p>
-                </section>
 
-                <!-- Experiencia -->
-                <section id="experiencia" class="scroll-mt-8">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg mb-3">
+                        Estudiante de Análisis de Sistemas, programador y Técnico Agropecuario. Me interesa entender
+                        cómo funciona absolutamente todo, encontrar sus fallas y las formas de mejorarlas.
+                    </p>
+                    <p class="text-gray-500 dark:text-gray-400 leading-relaxed mb-8">
+                        Actualmente trabajo en el área de Compras y Logística, mientras continúo formándome en
+                        desarrollo de software.
+                    </p>
+
+                    <!-- Currently doing -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+
+                        <div class="glass-card rounded-xl px-5 py-4 flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="size-5">
+                                <path fill-rule="evenodd"
+                                    d="M9.664 1.319a.75.75 0 0 1 .672 0 41.059 41.059 0 0 1 8.198 5.424.75.75 0 0 1-.254 1.285 31.372 31.372 0 0 0-7.86 3.83.75.75 0 0 1-.84 0 31.508 31.508 0 0 0-2.08-1.287V9.394c0-.244.116-.463.302-.592a35.504 35.504 0 0 1 3.305-2.033.75.75 0 0 0-.714-1.319 37 37 0 0 0-3.446 2.12A2.216 2.216 0 0 0 6 9.393v.38a31.293 31.293 0 0 0-4.28-1.746.75.75 0 0 1-.254-1.285 41.059 41.059 0 0 1 8.198-5.424ZM6 11.459a29.848 29.848 0 0 0-2.455-1.158 41.029 41.029 0 0 0-.39 3.114.75.75 0 0 0 .419.74c.528.256 1.046.53 1.554.82-.21.324-.455.63-.739.914a.75.75 0 1 0 1.06 1.06c.37-.369.69-.77.96-1.193a26.61 26.61 0 0 1 3.095 2.348.75.75 0 0 0 .992 0 26.547 26.547 0 0 1 5.93-3.95.75.75 0 0 0 .42-.739 41.053 41.053 0 0 0-.39-3.114 29.925 29.925 0 0 0-5.199 2.801 2.25 2.25 0 0 1-2.514 0c-.41-.275-.826-.541-1.25-.797a6.985 6.985 0 0 1-1.084 3.45 26.503 26.503 0 0 0-1.281-.78A5.487 5.487 0 0 0 6 12v-.54Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Estudiando Análisis de
+                                Sistemas</span>
+                        </div>
+
+                        <div class="glass-card rounded-xl px-5 py-4 flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="size-5">
+                                <path fill-rule="evenodd"
+                                    d="M6 3.75A2.75 2.75 0 0 1 8.75 1h2.5A2.75 2.75 0 0 1 14 3.75v.443c.572.055 1.14.122 1.706.2C17.053 4.582 18 5.75 18 7.07v3.469c0 1.126-.694 2.191-1.83 2.54-1.952.599-4.024.921-6.17.921s-4.219-.322-6.17-.921C2.694 12.73 2 11.665 2 10.539V7.07c0-1.321.947-2.489 2.294-2.676A41.047 41.047 0 0 1 6 4.193V3.75Zm6.5 0v.325a41.622 41.622 0 0 0-5 0V3.75c0-.69.56-1.25 1.25-1.25h2.5c.69 0 1.25.56 1.25 1.25ZM10 10a1 1 0 0 0-1 1v.01a1 1 0 0 0 1 1h.01a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H10Z"
+                                    clip-rule="evenodd" />
+                                <path
+                                    d="M3 15.055v-.684c.126.053.255.1.39.142 2.092.642 4.313.987 6.61.987 2.297 0 4.518-.345 6.61-.987.135-.041.264-.089.39-.142v.684c0 1.347-.985 2.53-2.363 2.686a41.454 41.454 0 0 1-9.274 0C3.985 17.585 3 16.402 3 15.055Z" />
+                            </svg>
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Trabajando en Compras y
+                                Logística</span>
+
+                        </div>
+
+                        <div class="glass-card rounded-xl px-5 py-4 flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="size-6">
+                                <path fill-rule="evenodd"
+                                    d="M10.5 3.798v5.02a3 3 0 0 1-.879 2.121l-2.377 2.377a9.845 9.845 0 0 1 5.091 1.013 8.315 8.315 0 0 0 5.713.636l.285-.071-3.954-3.955a3 3 0 0 1-.879-2.121v-5.02a23.614 23.614 0 0 0-3 0Zm4.5.138a.75.75 0 0 0 .093-1.495A24.837 24.837 0 0 0 12 2.25a25.048 25.048 0 0 0-3.093.191A.75.75 0 0 0 9 3.936v4.882a1.5 1.5 0 0 1-.44 1.06l-6.293 6.294c-1.62 1.621-.903 4.475 1.471 4.88 2.686.46 5.447.698 8.262.698 2.816 0 5.576-.239 8.262-.697 2.373-.406 3.092-3.26 1.47-4.881L15.44 9.879A1.5 1.5 0 0 1 15 8.818V3.936Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Experimentando con proyectos
+                                propios</span>
+                        </div>
+                    </div>
+
+                    <!-- Questions that interest me -->
+                    <div class="space-y-3">
+                        <p
+                            class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">
+                            Preguntas que me interesan
+                        </p>
+                        <div class="question-card">
+                            <p class="text-gray-600 dark:text-gray-400 italic">¿Cómo puedo mejorar este proceso?</p>
+                        </div>
+                        <div class="question-card">
+                            <p class="text-gray-600 dark:text-gray-400 italic">¿Por qué este sistema funciona así?</p>
+                        </div>
+                        <div class="question-card">
+                            <p class="text-gray-600 dark:text-gray-400 italic">¿Se puede hacer más simple?</p>
+                        </div>
+                        <div class="question-card">
+                            <p class="text-gray-600 dark:text-gray-400 italic">¿Qué hay detrás de esto?</p>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- RECORRIDO -->
+                <section id="recorrido" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
+                        Mi recorrido
+                    </h2>
+
+                    <div class="relative">
+                        <!-- Vertical line -->
+                        <div
+                            class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent-500/60 via-accent-500/20 to-transparent">
+                        </div>
+
+                        <div class="space-y-10">
+                            <!-- 2022 -->
+                            <div class="relative pl-12 fade-up">
+                                <div
+                                    class="absolute left-2 top-1.5 w-5 h-5 rounded-full bg-accent-500 ring-4 ring-accent-500/20">
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-accent-500 mb-1 block">
+                                    2022
+                                </span>
+                                <h3 class="text-lg font-semibold">Técnico Agropecuario</h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Egresé con formación en
+                                    producción, campo y gestión agropecuaria.</p>
+                            </div>
+
+                            <!-- 2022 -->
+                            <div class="relative pl-12 fade-up">
+                                <div
+                                    class="absolute left-2 top-1.5 w-5 h-5 rounded-full bg-accent-500/70 ring-4 ring-accent-500/15">
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-accent-500/80 mb-1 block">
+                                    2022
+                                </span>
+                                <h3 class="text-lg font-semibold">Administración y Operaciones</h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Primer contacto con el mundo
+                                    empresarial, operaciones y procesos administrativos.</p>
+                            </div>
+
+                            <!-- 2024 -->
+                            <div class="relative pl-12 fade-up">
+                                <div
+                                    class="absolute left-2 top-1.5 w-5 h-5 rounded-full bg-accent-500/70 ring-4 ring-accent-500/15">
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-accent-500/80 mb-1 block">
+                                    2024
+                                </span>
+                                <h3 class="text-lg font-semibold">Compras y Logística</h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Ingreso al área de compras,
+                                    proveedores y gestión de inventarios.</p>
+                            </div>
+
+                            <!-- 2026 -->
+                            <div class="relative pl-12 fade-up">
+                                <div
+                                    class="absolute left-2 top-1.5 w-5 h-5 rounded-full bg-accent-500 ring-4 ring-accent-500/20 ring-offset-2 ring-offset-white dark:ring-offset-gray-950">
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-accent-500 mb-1 block">
+                                    2026
+                                    — Presente
+                                </span>
+                                <h3 class="text-lg font-semibold">Supervisor de Compras + Análisis de Sistemas</h3>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Supervisor en compras y
+                                    logística mientras estudio Análisis de Sistemas.</p>
+                            </div>
+
+                            <!-- Next -->
+                            <div class="relative pl-12 fade-up">
+                                <div
+                                    class="absolute left-2 top-1.5 w-5 h-5 rounded-full border-2 border-dashed border-accent-500/50 bg-transparent">
+                                </div>
+                                <span
+                                    class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-1 block">Próximo...</span>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm italic">Actualmente estoy intentando
+                                    combinar dos mundos: negocios y tecnología.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- EXPERIENCIA -->
+                <section id="experiencia" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
                         Experiencia
                     </h2>
+
+                    <div class="space-y-6 stagger-children">
+                        <!-- Supervisor -->
+                        <div class="glass-card rounded-2xl p-6 md:p-8 fade-up">
+                            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">Supervisor de Compras y Logística</h3>
+                                    <p class="text-accent-600 dark:text-accent-400 text-sm font-medium">7 Saltos S.A.
+                                    </p>
+                                </div>
+                                <span
+                                    class="text-xs font-medium px-3 py-1 rounded-full bg-accent-500/10 text-accent-600 dark:text-accent-400 whitespace-nowrap self-start">
+                                    Ene 2026 — Presente
+                                </span>
+                            </div>
+                            <ul class="space-y-2 text-gray-500 dark:text-gray-400 text-sm">
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500 mt-0.5 shrink-0">▸</span>
+                                    Adquisición de productos y servicios para Casino, Hotel, Restaurante y Bar.
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500 mt-0.5 shrink-0">▸</span>
+                                    Supervisión de procesos de compras, control interno y personal logístico.
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500 mt-0.5 shrink-0">▸</span>
+                                    Negociación directa con proveedores y empresas de servicios.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Auxiliar Compras -->
+                        <div class="glass-card rounded-2xl p-6 md:p-8 fade-up">
+                            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">Auxiliar de Compras y Logística</h3>
+                                    <p class="text-accent-600 dark:text-accent-400 text-sm font-medium">7 Saltos S.A.
+                                    </p>
+                                </div>
+                                <span
+                                    class="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 whitespace-nowrap self-start">
+                                    Dic 2024 — 2025
+                                </span>
+                            </div>
+                            <ul class="space-y-2 text-gray-500 dark:text-gray-400 text-sm">
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500/60 mt-0.5 shrink-0">▸</span>
+                                    Recepción y verificación de mercaderías.
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500/60 mt-0.5 shrink-0">▸</span>
+                                    Transporte de mercancías, organización y limpieza de almacenes.
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500/60 mt-0.5 shrink-0">▸</span>
+                                    Compras menores, apoyo administrativo y gestión de órdenes de compra en ERP.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Shell -->
+                        <div class="glass-card rounded-2xl p-6 md:p-8 fade-up">
+                            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">Auxiliar Administrativo y Operativo</h3>
+                                    <p class="text-accent-600 dark:text-accent-400 text-sm font-medium">Estación de
+                                        Servicios Shell</p>
+                                </div>
+                                <span
+                                    class="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 whitespace-nowrap self-start">
+                                    Ene 2022 — 2022
+                                </span>
+                            </div>
+                            <ul class="space-y-2 text-gray-500 dark:text-gray-400 text-sm">
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500/60 mt-0.5 shrink-0">▸</span>
+                                    Arqueo diario de ventas de combustible, aceites y productos.
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500/60 mt-0.5 shrink-0">▸</span>
+                                    Pedidos de combustible y apoyo en tareas de RRHH.
+                                </li>
+                                <li class="flex gap-2">
+                                    <span class="text-accent-500/60 mt-0.5 shrink-0">▸</span>
+                                    Verificación de depósitos de combustible en tanques.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <!-- COSAS QUE HICE -->
+                <section id="proyectos" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
+                        Cosas que hice
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 stagger-children">
+                        <!-- Gestión de pedidos -->
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Sistema de gestión de pedidos</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                                Proyecto académico para digitalizar el registro, aprobación y seguimiento de pedidos.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">Java</span>
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">SQL</span>
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">REST
+                                    API</span>
+                            </div>
+                        </div>
+
+                        <!-- Gestión de bomberos -->
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Sistema de gestión de bomberos</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                                Proyecto académico orientado al registro de vehículos, combustible y operaciones.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">
+                                    GeneXus
+                                </span>
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">
+                                    Java
+                                </span>
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">
+                                    SQL
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Automatización compras -->
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Automatización y control de procesos empresariales
+                            </h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                                Experiencia práctica con procesos de compras, proveedores, órdenes de compra y ERP.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">SAP</span>
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">Compras</span>
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">Procesos</span>
+                            </div>
+                        </div>
+
+                        <!-- AngusCode -->
+                        <div class="glass-card rounded-2xl p-6 fade-up relative overflow-hidden">
+                            <div
+                                class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest text-accent-500/60">
+                                En desarrollo</div>
+                            <h3 class="text-base font-semibold mb-2">AngusCode</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+                                Proyecto personal como espacio para experimentar con software y soluciones digitales.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="tech-tag px-2.5 py-1 text-xs rounded-lg bg-accent-500/10 text-accent-600 dark:text-accent-400 font-medium">Proyecto
+                                    propio</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <!-- ACTUALMENTE -->
+                <section id="actualmente" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
+                        Actualmente
+                    </h2>
+
+                    <div class="grid grid-cols-1 stagger-children">
+                        <div class="glass-card rounded-2xl p-5 mb-2 fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">
+                                Trabajo en</p>
+                            <p class="text-base font-medium text-gray-800 dark:text-gray-200">Compras y Logística</p>
+                        </div>
+                        <div class="glass-card rounded-2xl p-5 mb-2 fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">
+                                Estudio</p>
+                            <p class="text-base font-medium text-gray-800 dark:text-gray-200">Análisis de Sistemas</p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-5 mb-2 fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">
+                                Proyecto personal</p>
+                            <p class="text-base font-medium text-gray-800 dark:text-gray-200">AngusCode</p>
+                        </div>
+                        <div class="glass-card rounded-2xl p-5 mb-2 fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">
+                                Interesado en</p>
+                            <p class="text-base font-medium text-gray-800 dark:text-gray-200">Control de
+                                procesos y sistemas empresariales</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tecnologia" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
+                        Tecnología
+                    </h2>
+
                     <div class="space-y-8">
-                        <!-- Item de experiencia -->
-                        <div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700">
-                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-emerald-500"></div>
-                            <h3 class="text-lg font-semibold">Desarrollador Frontend</h3>
-                            <p class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">Empresa XYZ · 2024 - Presente</p>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">
-                                Descripción de tu rol, responsabilidades y logros en este puesto.
-                            </p>
-                        </div>
-                        <!-- Item de experiencia -->
-                        <div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700">
-                            <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-emerald-500/50"></div>
-                            <h3 class="text-lg font-semibold">Freelance</h3>
-                            <p class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">2023 - 2024</p>
-                            <p class="text-gray-600 dark:text-gray-400 mt-2">
-                                Descripción de los proyectos freelance que realizaste.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Proyectos -->
-                <section id="proyectos" class="scroll-mt-8">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
-                        Proyectos
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Proyecto 1 -->
-                        <div class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-emerald-500/50 transition-all hover:shadow-lg hover:shadow-emerald-500/5">
-                            <h3 class="text-lg font-semibold group-hover:text-emerald-500 transition-colors">Proyecto 1</h3>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
-                                Descripción breve del proyecto y las tecnologías usadas.
-                            </p>
-                            <div class="flex gap-2 mt-4">
-                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">HTML</span>
-                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">CSS</span>
-                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">JS</span>
+                        <!-- Uso actualmente -->
+                        <div class="fade-up">
+                            <p class="text-xs font-semibold uppercase tracking-widest text-accent-500 mb-4">Uso
+                                actualmente</p>
+                            <div class="flex flex-wrap gap-2.5">
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-accent-500/10 text-accent-700 dark:text-accent-300 border border-accent-500/20">
+                                    Java
+                                </span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-accent-500/10 text-accent-700 dark:text-accent-300 border border-accent-500/20">
+                                    SQL
+                                </span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-accent-500/10 text-accent-700 dark:text-accent-300 border border-accent-500/20">
+                                    Git
+                                </span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-accent-500/10 text-accent-700 dark:text-accent-300 border border-accent-500/20">
+                                    HTML / CSS
+                                </span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-accent-500/10 text-accent-700 dark:text-accent-300 border border-accent-500/20">
+                                    SpringBoot
+                                </span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-accent-500/10 text-accent-700 dark:text-accent-300 border border-accent-500/20">
+                                    Tailwind / Bootstrap
+                                </span>
                             </div>
                         </div>
-                        <!-- Proyecto 2 -->
-                        <div class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-emerald-500/50 transition-all hover:shadow-lg hover:shadow-emerald-500/5">
-                            <h3 class="text-lg font-semibold group-hover:text-emerald-500 transition-colors">Proyecto 2</h3>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
-                                Descripción breve del proyecto y las tecnologías usadas.
-                            </p>
-                            <div class="flex gap-2 mt-4">
-                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">React</span>
-                                <span class="px-2 py-1 text-xs rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">Tailwind</span>
+
+                        <!-- Aprendiendo -->
+                        <div class="fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">
+                                Aprendiendo</p>
+                            <div class="flex flex-wrap gap-2.5">
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50">Laravel
+                                    / PHP</span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50">AWS</span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50">GeneXus</span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700/50">Python</span>
+                            </div>
+                        </div>
+
+                        <!-- Quiero explorar -->
+                        <div class="fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">
+                                Quiero explorar</p>
+                            <div class="flex flex-wrap gap-2.5">
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 dark:bg-gray-900/60 text-gray-400 dark:text-gray-500 border border-dashed border-gray-300 dark:border-gray-700">
+                                    Docker
+                                </span>
+                                <span
+                                    class="tech-tag px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 dark:bg-gray-900/60 text-gray-400 dark:text-gray-500 border border-dashed border-gray-300 dark:border-gray-700">
+                                    Cloud
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Mi mundo tecnológico -->
+                        <div class="glass-card rounded-2xl p-6 md:p-8 mt-8 fade-up">
+                            <p
+                                class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6">
+                                Mi mundo tecnológico</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                                <div>
+                                    <p class="text-accent-500 text-xs font-bold uppercase tracking-widest mb-3">
+                                        Desarrollo</p>
+                                    <ul class="space-y-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                        <li>Java</li>
+                                        <li>PHP / Laravel</li>
+                                        <li>HTML / CSS</li>
+                                        <li>Python</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-accent-500 text-xs font-bold uppercase tracking-widest mb-3">Datos
+                                    </p>
+                                    <ul class="space-y-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                        <li>SQL</li>
+                                        <li>MySQL</li>
+                                        <li>SQL Server</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-accent-500 text-xs font-bold uppercase tracking-widest mb-3">Empresa
+                                    </p>
+                                    <ul class="space-y-1.5 text-sm text-gray-600 dark:text-gray-400">
+                                        <li>SAP</li>
+                                        <li>ERP</li>
+                                        <li>Compras</li>
+                                        <li>Procesos</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
-
-                <!-- Habilidades -->
-                <section id="habilidades" class="scroll-mt-8">
-                    <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
-                        Habilidades
+                <!-- MÁS ALLÁ DEL CÓDIGO -->
+                <section id="intereses" class="scroll-mt-8 fade-up">
+                    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
+                        Off Code
                     </h2>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">HTML</span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">CSS</span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">JavaScript</span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">Tailwind CSS</span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">Git</span>
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">React</span>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-8">No todo gira alrededor de
+                        <code
+                            class="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-xs font-mono">SELECT * FROM usuarios</code>,
+                        por suerte.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 stagger-children">
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">One Piece</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                Una de mis historias favoritas. Me gustan las historias que construyen su mundo durante
+                                años y después conectan cosas que parecían insignificantes.
+                            </p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Tecnología</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                Me interesa entender cómo funcionan los sistemas, desde software hasta hardware. Aprendo
+                                mejor cuando puedo construir algo y romperlo unas cuantas veces.
+                            </p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Salesiano de Don Bosco</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                "Siempre trabajar. Este debe ser el fin de todo Salesiano y su continuo suspiro"
+                                "Quien no sabe trabajar no es Salesiano"
+                            </p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed text-right">- Don
+                                Bosco</p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Videojuegos</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                Principalmente RPG, aventuras y competitivos. Terraria, Hollow Knight y la saga Souls
+                                entre mis favoritos.
+                            </p>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 sm:col-span-2 fade-up">
+                            <h3 class="text-base font-semibold mb-2">Campo y producción</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                Mi formación como Técnico Agropecuario también forma parte de quién soy.
+                            </p>
+                        </div>
                     </div>
                 </section>
-
-                <!-- Contacto -->
-                <section id="contacto" class="scroll-mt-8 pb-12">
+                <!-- CONTACTO -->
+                <section id="contacto" class="scroll-mt-8 pb-16 fade-up">
                     <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        <span
+                            class="section-line h-1 bg-gradient-to-r from-accent-500 to-accent-400 rounded-full"></span>
                         Contacto
                     </h2>
-                    <div class="p-8 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
-                        <p class="text-gray-600 dark:text-gray-300 mb-6">
-                            ¿Querés trabajar conmigo o tenés alguna pregunta? Escribime.
+
+                    <div class="glass-card rounded-2xl p-8">
+                        <p class="text-gray-500 dark:text-gray-400 mb-6">
+                            ¿Querés hablar sobre un proyecto? Escribime.
                         </p>
                         <div class="flex flex-col gap-4">
-                            <a href="mailto:lucas@email.com"
-                                class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 font-medium transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
-                                </svg>
-                                lucas@email.com
+                            <a href="mailto:lucasasm096@gmail.com" id="contact-email"
+                                class="inline-flex items-center gap-3 text-accent-600 dark:text-accent-400 hover:text-accent-500 font-medium transition-colors group">
+                                <span
+                                    class="p-2 rounded-lg bg-accent-500/10 group-hover:bg-accent-500/20 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
+                                    </svg>
+                                </span>
+                                lucasasm096@gmail.com
                             </a>
-                            <a href="#"
-                                class="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 font-medium transition-colors">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
+                            <a href="https://github.com/LaSM4" target="_blank" rel="noopener noreferrer"
+                                id="contact-github"
+                                class="inline-flex items-center gap-3 text-accent-600 dark:text-accent-400 hover:text-accent-500 font-medium transition-colors group">
+                                <span
+                                    class="p-2 rounded-lg bg-accent-500/10 group-hover:bg-accent-500/20 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </span>
+                                GitHub
+                            </a>
+                            <a href="https://www.linkedin.com/in/lucas-a-saavedra-maciel-a79891200/" target="_blank"
+                                rel="noopener noreferrer" id="contact-linkedin"
+                                class="inline-flex items-center gap-3 text-accent-600 dark:text-accent-400 hover:text-accent-500 font-medium transition-colors group">
+                                <span
+                                    class="p-2 rounded-lg bg-accent-500/10 group-hover:bg-accent-500/20 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg>
+                                </span>
                                 LinkedIn
                             </a>
                         </div>
